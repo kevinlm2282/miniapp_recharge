@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:miniapp_recharge/button/button_select.dart';
 import 'package:miniapp_recharge/button/button_select_option.dart';
@@ -32,7 +34,13 @@ class Credit_Recharge extends StatefulWidget {
 
 class _Credit_RechargeState extends State<Credit_Recharge> {
   List<String> empresas = ["Viva", "Tigo", "Entel"];
-
+  Map<String, String> img = {
+    "Viva":
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/VIVA2020.png/800px-VIVA2020.png",
+    "Tigo": "https://www.tigo.com.bo/assets/square-tigo.png",
+    "Entel":
+        "https://institucional.entel.bo/inicio3.0/images/Prensa/ENTEL_MARCA_PODEROSA_2013_/Imagen1.png"
+  };
   String emp = "Viva";
   @override
   Widget build(BuildContext context) {
@@ -107,7 +115,7 @@ class _Credit_RechargeState extends State<Credit_Recharge> {
                     ),
                     DropdownButton(
                       icon: Icon(Icons.arrow_drop_down, color: Colors.white),
-                      items: listData(empresas),
+                      items: listData(empresas, img),
                       underline: Container(
                         height: 0,
                         color: Colors.white,
@@ -181,9 +189,10 @@ class _Credit_RechargeState extends State<Credit_Recharge> {
               height: 25,
             ),
             Container(
-              child: ElevatedButton(onPressed: () {}, child: Text("Continuar")),
-              width: size.width * 0.85,
-            )
+                child:
+                    ElevatedButton(onPressed: () {}, child: Text("Continuar")),
+                width: size.width * 0.85,
+                height: size.height * 0.075)
           ],
         )),
       ),
@@ -191,7 +200,8 @@ class _Credit_RechargeState extends State<Credit_Recharge> {
   }
 }
 
-List<DropdownMenuItem<String>> listData(dynamic opciones) {
+List<DropdownMenuItem<String>> listData(
+    dynamic opciones, Map<String, String> img) {
   List<DropdownMenuItem<String>> listaObj = [];
 
   opciones.forEach((element) {
@@ -207,8 +217,7 @@ List<DropdownMenuItem<String>> listData(dynamic opciones) {
             Text(element),
             CircleAvatar(
               minRadius: 30,
-              backgroundImage: NetworkImage(
-                  "https://upload.wikimedia.org/wikipedia/commons/4/47/Tigo.JPG"),
+              backgroundImage: NetworkImage("${img[element]}"),
             )
           ],
         ),
