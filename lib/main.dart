@@ -12,7 +12,6 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
-
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -37,23 +36,35 @@ class _Credit_RechargeState extends State<Credit_Recharge> {
   Map<String, String> img = {
     "Viva":
         "https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/VIVA2020.png/800px-VIVA2020.png",
-    "Tigo": "https://www.tigo.com.bo/assets/square-tigo.png",
+    "Tigo":
+        "https://es.logodownload.org/wp-content/uploads/2018/12/tigo-logo-11.png",
     "Entel":
         "https://institucional.entel.bo/inicio3.0/images/Prensa/ENTEL_MARCA_PODEROSA_2013_/Imagen1.png"
   };
   String emp = "Viva";
   TextEditingController controller = TextEditingController();
+  String? gender;
+  double _value = 20;
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     Color button = textSecondColor;
     Color text = baniPurple;
-
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Form(
-            child: SingleChildScrollView(
+        body: SingleChildScrollView(
+            child: Column(
+      children: [
+        Container(
+          padding: EdgeInsets.all(18.0),
+          height: size.height * 0.10,
+          width: size.width,
+          // color: Colors.blueGrey,
+          child: Image.asset('white_appbar_label.png'),
+          color: baniTeal,
+        ),
+        Padding(
+          padding: const EdgeInsets.all(20.0),
           child: Column(
             children: <Widget>[
               SizedBox(
@@ -62,77 +73,113 @@ class _Credit_RechargeState extends State<Credit_Recharge> {
               Text(
                 "Datos de la recarga",
                 style: TextStyle(
-                    color: baniTeal, fontWeight: FontWeight.bold, fontSize: 30),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Text(
-                "Selecione un numero de Telefono",
-                style: TextStyle(color: baniTeal),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              TextFormField(
-                decoration: InputDecoration(
-                  icon: Icon(Icons.add_ic_call, color: baniPurple),
-                  hintText: 'Ingrese numero de celular',
-                  labelText: 'Celular',
-                  disabledBorder: OutlineInputBorder(
-                      borderSide:
-                          const BorderSide(color: baniPurple, width: 2.0),
-                      borderRadius: BorderRadius.circular(10)),
-                  enabledBorder: OutlineInputBorder(
-                      borderSide:
-                          const BorderSide(color: baniPurple, width: 2.0),
-                      borderRadius: BorderRadius.circular(10)),
-                  focusedBorder: OutlineInputBorder(
-                      borderSide:
-                          const BorderSide(color: baniPurple, width: 2.0),
-                      borderRadius: BorderRadius.circular(10)),
-                  border: OutlineInputBorder(
-                    borderSide: const BorderSide(color: baniBlue, width: 2.0),
-                  ),
+                  color: baniPurple,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 30,
                 ),
               ),
               SizedBox(
                 height: 20,
               ),
               Text(
-                "Selecione la empresa",
-                style: TextStyle(color: baniTeal),
+                "Selecione un numero de Telefono",
+                style: TextStyle(color: baniPurple),
               ),
               SizedBox(
-                height: 10,
+                height: 20,
               ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Container(
-                  padding: EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      color: baniPurple),
+              Container(
+                width: size.width * 0.85,
+                child: TextFormField(
+                  decoration: InputDecoration(
+                    icon: Icon(Icons.add_ic_call, color: baniPurple),
+                    hintText: 'Ingrese numero de celular',
+                    labelText: 'Celular',
+                    disabledBorder: OutlineInputBorder(
+                        borderSide:
+                            const BorderSide(color: baniPurple, width: 2.0),
+                        borderRadius: BorderRadius.circular(10)),
+                    enabledBorder: OutlineInputBorder(
+                        borderSide:
+                            const BorderSide(color: baniPurple, width: 2.0),
+                        borderRadius: BorderRadius.circular(10)),
+                    focusedBorder: OutlineInputBorder(
+                        borderSide:
+                            const BorderSide(color: baniPurple, width: 2.0),
+                        borderRadius: BorderRadius.circular(10)),
+                    border: OutlineInputBorder(
+                      borderSide: const BorderSide(color: baniBlue, width: 2.0),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              Text(
+                "Selecione la empresa",
+                style: TextStyle(color: baniPurple),
+              ),
+              Container(
+                height: 130,
+                width: size.width * 0.8,
+                // color: Colors.amber,
+                // padding: EdgeInsets.only(left: 20, right: 20),
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Empresa",
-                        style: TextStyle(color: textSecondColor),
+                    children: <Widget>[
+                      Row(
+                        children: <Widget>[
+                          Radio(
+                              activeColor: baniTeal,
+                              value: "viva",
+                              groupValue: gender,
+                              onChanged: (value) {
+                                setState(() {
+                                  gender = value.toString();
+                                });
+                              }),
+                          CircleAvatar(
+                            radius: 40,
+                            backgroundImage: AssetImage("viva.png"),
+                          )
+                        ],
                       ),
-                      DropdownButton(
-                        icon: Icon(Icons.arrow_drop_down, color: Colors.white),
-                        items: listData(empresas, img),
-                        underline: Container(
-                          height: 0,
-                          color: Colors.white,
-                        ),
-                        value: emp,
-                        onChanged: (String? opt) {
-                          setState(() {
-                            emp = opt!;
-                          });
-                        },
+                      Row(
+                        children: <Widget>[
+                          Radio(
+                              activeColor: baniTeal,
+                              value: "entel",
+                              groupValue: gender,
+                              onChanged: (value) {
+                                setState(() {
+                                  gender = value.toString();
+                                });
+                              }),
+                          CircleAvatar(
+                            radius: 40,
+                            backgroundImage: AssetImage("entel1.png"),
+                          )
+                        ],
+                      ),
+                      Row(
+                        children: <Widget>[
+                          Radio(
+                              activeColor: baniTeal,
+                              value: "tigo",
+                              groupValue: gender,
+                              onChanged: (value) {
+                                setState(() {
+                                  gender = value.toString();
+                                });
+                              }),
+                          CircleAvatar(
+                            radius: 40,
+                            backgroundImage: AssetImage("tigo.png"),
+                          )
+                        ],
                       ),
                     ],
                   ),
@@ -143,7 +190,7 @@ class _Credit_RechargeState extends State<Credit_Recharge> {
               ),
               Text(
                 "Selecione el monto de recarga",
-                style: TextStyle(color: baniTeal),
+                style: TextStyle(color: baniPurple),
               ),
               SizedBox(
                 height: 20,
@@ -162,6 +209,7 @@ class _Credit_RechargeState extends State<Credit_Recharge> {
                     ),
                   ),
                   FloatingActionButton(
+                    backgroundColor: baniPurple,
                     onPressed: () {
                       controller.text = '10';
                       setState(() {});
@@ -189,24 +237,27 @@ class _Credit_RechargeState extends State<Credit_Recharge> {
               SizedBox(
                 height: 25,
               ),
-              TextFormField(
-                controller: controller,
-                decoration: InputDecoration(
-                  icon: Text("Bs"),
-                  disabledBorder: OutlineInputBorder(
-                      borderSide:
-                          const BorderSide(color: baniPurple, width: 2.0),
-                      borderRadius: BorderRadius.circular(10)),
-                  enabledBorder: OutlineInputBorder(
-                      borderSide:
-                          const BorderSide(color: baniPurple, width: 2.0),
-                      borderRadius: BorderRadius.circular(10)),
-                  focusedBorder: OutlineInputBorder(
-                      borderSide:
-                          const BorderSide(color: baniPurple, width: 2.0),
-                      borderRadius: BorderRadius.circular(10)),
-                  border: OutlineInputBorder(
-                    borderSide: const BorderSide(color: baniBlue, width: 2.0),
+              Container(
+                width: size.width * 0.85,
+                child: TextFormField(
+                  controller: controller,
+                  decoration: InputDecoration(
+                    icon: Text("Bs"),
+                    disabledBorder: OutlineInputBorder(
+                        borderSide:
+                            const BorderSide(color: baniPurple, width: 2.0),
+                        borderRadius: BorderRadius.circular(10)),
+                    enabledBorder: OutlineInputBorder(
+                        borderSide:
+                            const BorderSide(color: baniPurple, width: 2.0),
+                        borderRadius: BorderRadius.circular(10)),
+                    focusedBorder: OutlineInputBorder(
+                        borderSide:
+                            const BorderSide(color: baniPurple, width: 2.0),
+                        borderRadius: BorderRadius.circular(10)),
+                    border: OutlineInputBorder(
+                      borderSide: const BorderSide(color: baniBlue, width: 2.0),
+                    ),
                   ),
                 ),
               ),
@@ -228,33 +279,33 @@ class _Credit_RechargeState extends State<Credit_Recharge> {
                   height: size.height * 0.075)
             ],
           ),
-        )),
-      ),
-    );
+        ),
+      ],
+    )));
   }
 }
 
-List<DropdownMenuItem<String>> listData(
-    dynamic opciones, Map<String, String> img) {
-  List<DropdownMenuItem<String>> listaObj = [];
+// List<DropdownMenuItem<String>> listData(
+//     dynamic opciones, Map<String, String> img) {
+//   List<DropdownMenuItem<String>> listaObj = [];
 
-  opciones.forEach((element) {
-    listaObj.add(DropdownMenuItem(
-      child: Container(
-        padding: EdgeInsets.all(5),
-        width: 60,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(30), color: textSecondColor),
-        child: Center(
-          child: CircleAvatar(
-            minRadius: 30,
-            backgroundImage: NetworkImage("${img[element]}"),
-          ),
-        ),
-      ),
-      value: element,
-    ));
-  });
+//   opciones.forEach((element) {
+//     listaObj.add(DropdownMenuItem(
+//       child: Container(
+//         padding: EdgeInsets.all(5),
+//         width: 60,
+//         decoration: BoxDecoration(
+//             borderRadius: BorderRadius.circular(30), color: textSecondColor),
+//         child: Center(
+//           child: CircleAvatar(
+//             minRadius: 30,
+//             backgroundImage: NetworkImage("${img[element]}"),
+//           ),
+//         ),
+//       ),
+//       value: element,
+//     ));
+//   });
 
-  return listaObj;
-}
+//   return listaObj;
+// }
