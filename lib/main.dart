@@ -143,7 +143,8 @@ class _Credit_RechargeState extends State<Credit_Recharge> {
                               }),
                           CircleAvatar(
                             radius: 40,
-                            backgroundImage: AssetImage("viva.png"),
+                            backgroundImage: NetworkImage(
+                                "https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/VIVA2020.png/800px-VIVA2020.png"),
                           )
                         ],
                       ),
