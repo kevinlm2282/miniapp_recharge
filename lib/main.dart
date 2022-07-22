@@ -276,7 +276,10 @@ class _Credit_RechargeState extends State<Credit_Recharge> {
                       onPressed: () {},
                       child: Text("Continuar")),
                   width: size.width * 0.85,
-                  height: size.height * 0.075)
+                  height: 55),
+              SizedBox(
+                height: 100,
+              ),
             ],
           ),
         ),
